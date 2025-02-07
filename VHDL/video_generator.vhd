@@ -43,7 +43,7 @@ architecture behave of video_generator is
     signal v_count     		        : integer range 0 to 1023 := 0;
     signal new_frame             	: std_logic;
     signal hs, vs, de            	: std_logic;
-	signal r, g, b            		: std_logic_vector(7 downto 0);
+    signal r, g, b            		: std_logic_vector(7 downto 0);
     signal h_start	                : integer range 0 to 2047 := 600;
     signal h_end	                : integer range 0 to 2047 := 700;
 
@@ -62,16 +62,16 @@ begin
         h_count   <= 0;
         v_count   <= 0;
         new_frame <= '0';
-	else
+    else
         new_frame  <= '0'; -- default
         -- count total pixel of a line
-		if (h_count < 1650-1 ) then
-			h_count <= h_count + 1;
+        if (h_count < 1650-1 ) then
+                h_count <= h_count + 1;
         else 
             h_count <= 0;
             -- count total lines of a frame
-		    if (v_count < 750-1 ) then
-			    v_count <= v_count + 1;
+            if (v_count < 750-1 ) then
+                v_count <= v_count + 1;
             else 
                 v_count <= 0;
                 new_frame  <= '1'; -- indicate new frame for one clock cycle
@@ -81,13 +81,13 @@ begin
 
     -- timing for horizontal sync
     if ( h_count < 40 ) then
-       hs <= '1'; else
-       hs <= '0'; end if;
+         hs <= '1'; else
+         hs <= '0'; end if;
 
     -- timing for vertical sync
     if ( v_count < 5 ) then
-         vs <= '1'; else
-         vs <= '0'; end if;
+        vs <= '1'; else
+        vs <= '0'; end if;
 
     -- check if active image
     -- attention: "back porch" is at beginning of row/column
@@ -119,7 +119,7 @@ begin
     if (reset = '1' or h_start=800) then
         h_start   <= 600;
         h_end     <= 700;
-	elsif (new_frame = '1') then
+    elsif (new_frame = '1') then
         -- move the square by one pixel for each frame
         h_start   <= h_start+1;
         h_end     <= h_end  +1;
