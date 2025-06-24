@@ -12,6 +12,7 @@
 --
 -- FPGA Vision Remote Lab http://h-brs.de/fpga-vision-lab
 -- (c) Marco Winzker, Hochschule Bonn-Rhein-Sieg, 05.02.2025
+--   24.6.2025   added comments for video lecture
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -90,7 +91,7 @@ begin
         vs <= '0'; end if;
 
     -- check if active image
-    -- attention: "back porch" is at beginning of row/column
+    -- from back_porch to back_porch+active_lines/column (back_porch is at beginning of row/column)
     if ( h_count >= 220 and h_count < (220+1280) and
          v_count >=  20 and v_count < ( 20+ 720) ) then
         -- active image, set to gray
