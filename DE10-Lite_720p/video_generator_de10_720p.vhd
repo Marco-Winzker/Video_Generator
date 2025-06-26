@@ -26,8 +26,6 @@ end video_generator_de10_720p;
 architecture shell of video_generator_de10_720p is
 
 signal clk_74   : std_logic;
-signal reset_n  : std_logic;
-signal enable_in: std_logic_vector(2 downto 0);
 signal r, g, b  : std_logic_vector(7 downto 0);
 signal count_74 : unsigned(29 downto 0);
 
@@ -41,10 +39,6 @@ clock_gen: entity work.clock_74
 process
 begin
   wait until rising_edge(clk_74);
-     -- synchronize inputs with clock
-     reset_n   <= key(0);
-     enable_in <= sw;
-
      -- check correct function of PLL with LEDs
      -- count 74.25 million times per second
      -- 10 bit is about 1,000
@@ -59,8 +53,8 @@ end process;
 -- submodule video_generator
 generator: entity work.video_generator
     port map (clk       => clk_74,
-              reset_n   => reset_n,
-              enable_in => enable_in,
+              reset_n   => key(0),
+              enable_in => sw,
               vs_out    => vga_vs,
               hs_out    => vga_hs,
               de_out    => open,
