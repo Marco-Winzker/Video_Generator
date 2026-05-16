@@ -1,5 +1,5 @@
 # Video_Generator_Clock-Handling
-Design exercise with unsafe signal handling a clock-domain crossing
+Design exercise with unsafe signal handling at clock-domain crossing
 
 See YouTube lecture video for information:
 https://www.youtube.com/playlist?list=PLGzeDuLmmxDr8fKpJgxUmnOW7yRb7_qYP
